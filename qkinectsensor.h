@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef QKINECTSENSOR_H
 #define QKINECTSENSOR_H
 
@@ -5,9 +7,11 @@
 #include "EasyKinect.h"
 #include <Windows.h>
 #include <QString>
+#include <QThread>
 
 class QKinectSensor : public QThread
 {
+	Q_OBJECT
 	public:
 		struct Exceptions
 		{

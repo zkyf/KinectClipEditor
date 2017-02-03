@@ -4,7 +4,7 @@ QKinectSensor::QKinectSensor()
 {
 	sensor = new KinectSensor();
 	types = FrameSourceTypes_None;
-	hr = false;
+	HRESULT hr = false;
 	if(!sensor)
 	{
 		throw Exceptions::NewSensor();
@@ -45,7 +45,7 @@ void QKinectSensor::run()
 		}
 		if(types | FrameSourceTypes_Infrared)
 		{
-			cv::Mat newMat = sensor->getInfraMat();
+			cv::Mat newMat = sensor->getInfraredMat();
 			if(!newMat.empty())
 			{
 				lastInfraFrame = newMat.clone();

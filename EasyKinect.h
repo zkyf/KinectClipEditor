@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef _LJX_EASYKINECT_H
 #define _LJX_EASTKINECT_H
 
@@ -23,11 +25,11 @@ using namespace std;
 template<class Interface>
 inline void SafeRelease(Interface *& pInterfaceToRelease)
 {
-  if (pInterfaceToRelease != NULL)
-  {
-    pInterfaceToRelease->Release();
-    pInterfaceToRelease = NULL;
-  }
+	if (pInterfaceToRelease != NULL)
+	{
+		pInterfaceToRelease->Release();
+		pInterfaceToRelease = NULL;
+	}
 }
 
 #if defined (_USE_OPENCV) && !defined(_OPENCV_USED)
@@ -46,7 +48,7 @@ cv::Mat depth2mat(IDepthFrame* depthframe)
   int height = 0, width = 0;
   size->get_Height(&height);
   size->get_Width(&width);
-  SafeRelease(size);
+	SafeRelease(size);
   cv::Mat frame(height, width, CV_16U, cv::Scalar::all(0));
   UINT16* depthbuffer = NULL;
   UINT buffersize = 0;
@@ -75,12 +77,12 @@ cv::Mat color2mat(IColorFrame* colorframe)
   int height = 0, width = 0;
   size->get_Height(&height);
   size->get_Width(&width);
-  SafeRelease(size);
+	SafeRelease(size);
   cv::Mat frame(height, width, CV_8UC3, cv::Scalar::all(0));
   static RGBQUAD* colorbuffer = new RGBQUAD[height * width];
   UINT buffersize = height * width * sizeof(RGBQUAD);
-  colorframe->CopyConvertedFrameDataToArray(buffersize, reinterpret_cast<BYTE*>(colorbuffer), ColorImageFormat_Bgra);
-  if (SUCCEEDED(colorframe))
+	HRESULT hr = colorframe->CopyConvertedFrameDataToArray(buffersize, reinterpret_cast<BYTE*>(colorbuffer), ColorImageFormat_Bgra);
+	if (SUCCEEDED(hr))
   {
     for (int i = 0; i < height; i++)
     {
@@ -107,7 +109,7 @@ cv::Mat infra2mat(IInfraredFrame* infraframe)
   int height = 0, width = 0;
   size->get_Height(&height);
   size->get_Width(&width);
-  SafeRelease(size);
+	SafeRelease(size);
   cv::Mat frame(height, width, CV_16U, cv::Scalar::all(0));
   UINT16* buffer = NULL;
   UINT buffersize = 0;
@@ -131,7 +133,7 @@ cv::Mat bodyindex2mat(IBodyIndexFrame* bodyindex)
     int height = 0, width = 0;
     size->get_Height(&height);
     size->get_Width(&width);
-    SafeRelease(size);
+		SafeRelease(size);
     cv::Mat frame(height, width, CV_8U, cv::Scalar::all(0));
     BYTE* buffer = NULL;
     UINT buffersize = 0;
@@ -189,9 +191,9 @@ public:
 
   ~KinectSensor()
   {
-    SafeRelease(coordinatemapper);
-    SafeRelease(multireader);
-    SafeRelease(frame);
+		SafeRelease(coordinatemapper);
+		SafeRelease(multireader);
+		SafeRelease(frame);
         running = false;
     if (sensor != NULL) { sensor->Close(); sensor->Release(); sensor = NULL; }
   }
@@ -203,9 +205,9 @@ public:
 
     void close()
     {
-        SafeRelease(coordinatemapper);
-        SafeRelease(multireader);
-        SafeRelease(frame);
+				SafeRelease(coordinatemapper);
+				SafeRelease(multireader);
+				SafeRelease(frame);
         if (sensor != NULL) { sensor->Close(); sensor->Release(); sensor = NULL; }
     }
 
@@ -235,7 +237,7 @@ public:
   HRESULT update()
   {
     HRESULT result;
-    SafeRelease(frame);
+		SafeRelease(frame);
     result = multireader->AcquireLatestFrame(&frame);
     return result;
   }
@@ -252,7 +254,7 @@ public:
     if (SUCCEEDED(result))
     {
       result = depthref->AcquireFrame(depth);
-      SafeRelease(depthref);
+			SafeRelease(depthref);
     }
 #if defined (_LJX_DEBUG)
     else
@@ -269,7 +271,7 @@ public:
         if (SUCCEEDED(result))
         {
             result = bodyref->AcquireFrame(bodyindex);
-            SafeRelease(bodyref);
+						SafeRelease(bodyref);
         }
 #if defined (_LJX_DEBUG)
         else
@@ -290,7 +292,7 @@ public:
     if (SUCCEEDED(result))
     {
       result = colorref->AcquireFrame(color);
-      SafeRelease(colorref);
+			SafeRelease(colorref);
     }
 #if defined (_LJX_DEBUG)
     else
@@ -311,7 +313,7 @@ public:
     if (SUCCEEDED(result))
     {
       result = ref->AcquireFrame(body);
-      SafeRelease(ref);
+			SafeRelease(ref);
     }
 #if defined (_LJX_DEBUG)
     else
@@ -332,7 +334,7 @@ public:
     if (SUCCEEDED(result))
     {
       result = ref->AcquireFrame(infra);
-      SafeRelease(ref);
+			SafeRelease(ref);
     }
 #if defined (_LJX_DEBUG)
     else
@@ -354,7 +356,7 @@ public:
     if (SUCCEEDED(result))
     {
       cv::Mat mat = depth2mat(getframe);
-      SafeRelease(getframe);
+			SafeRelease(getframe);
       return mat;
     }
     return cv::Mat();
@@ -372,7 +374,7 @@ public:
         if (SUCCEEDED(result))
         {
             cv::Mat mat = bodyindex2mat(getframe);
-            SafeRelease(getframe);
+						SafeRelease(getframe);
             return mat;
         }
 #ifdef _LJX_DEBUG
@@ -393,7 +395,7 @@ public:
     if (SUCCEEDED(result))
     {
       cv::Mat mat = color2mat(getframe);
-      SafeRelease(getframe);
+			SafeRelease(getframe);
       return mat;
     }
     return cv::Mat();
@@ -411,7 +413,7 @@ public:
     if (SUCCEEDED(result))
     {
       cv::Mat mat = infra2mat(getframe);
-      SafeRelease(getframe);
+			SafeRelease(getframe);
       return mat;
     }
     return cv::Mat();

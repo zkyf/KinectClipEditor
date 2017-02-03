@@ -24,3 +24,17 @@ void MainWindow::SetGraphicsViewContent(int width, int height, uchar* data)
 	ui->graphicsView->adjustSize();
 	ui->graphicsView->show();
 }
+
+void MainWindow::on_buttonOpen_clicked()
+{
+	QString fileName = QFileDialog::getOpenFileName(
+				this, tr("Open file"), "",
+				tr("All file(*.*),MatStream(*.matstream)")
+				);
+	emit Open(fileName);
+}
+
+void MainWindow::on_buttonPlay_clicked()
+{
+		emit Play();
+}

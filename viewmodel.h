@@ -6,6 +6,7 @@
 #include <QString>
 #include <QMessageBox>
 #include <QThread>
+#include <QDebug>
 
 #include <string>
 #include <vector>
@@ -13,6 +14,7 @@ using namespace std;
 
 class ViewModel : public QThread
 {
+	Q_OBJECT
 	public:
     ViewModel();
 
@@ -30,13 +32,16 @@ class ViewModel : public QThread
 	private:
 		MatStream stream;
 		MatStreamHeader header;
+		cv::Mat nowFrame;
 		QString fileName;
 		int nowHead;
 		int nowEnd;
 		int nowPos;
+		int lastPos;
 		int totalLen;
 		bool playing;
 		bool running;
+		bool opened;
 
 	signals:
 		void NewFrame(int width, int height, uchar* data);
@@ -44,7 +49,7 @@ class ViewModel : public QThread
 
 	public slots:
 		void Play();
-		void Stop();
+		void Pause();
 		void Goto(int pos);
 		void SetHead(int head);
 		void SetEnd(int end);

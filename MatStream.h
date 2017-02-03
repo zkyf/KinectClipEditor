@@ -4,7 +4,7 @@
 #define _MATSTREAM_H
 
 #include <opencv2\opencv.hpp>
-using namespace cv;
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -48,8 +48,8 @@ public:
 	MatStreamHeader GetHead();
 	void Open(string filename, Op op);
 	bool Fail();
-	bool Write(Mat content);
-	Mat Read();
+	bool Write(cv::Mat content);
+	cv::Mat Read();
 	void Close();
 	int FrameNum();
 	void SeekMat(int pos);

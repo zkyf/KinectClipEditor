@@ -2,9 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#define _USE_OPENCV
-#include "EasyKinect.h"
-#include "viewmodel.h"
+#include <QFileDialog>
 
 namespace Ui {
 class MainWindow;
@@ -20,10 +18,16 @@ public:
 
 private:
     Ui::MainWindow *ui;
-		ViewModel viewModel;
+
+	signals:
+		void Open(QString);
+		void Play();
 
 public slots:
 		void SetGraphicsViewContent(int, int, uchar*);
+	private slots:
+		void on_buttonOpen_clicked();
+		void on_buttonPlay_clicked();
 };
 
 #endif // MAINWINDOW_H

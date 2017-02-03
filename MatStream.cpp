@@ -30,7 +30,7 @@ void MatStream::SetHead(MatStreamHeader _header)
 	return;
 }
 
-void MatStream::GetHead()
+MatStreamHeader MatStream::GetHead()
 {
 	return header;
 }
@@ -55,7 +55,7 @@ bool MatStream::Fail()
 	return file.fail();
 }
 
-bool MatStream::Write(Mat content)
+bool MatStream::Write(cv::Mat content)
 {
 	if (content.rows != header.height || content.cols != header.width)
 		return false;
@@ -66,11 +66,11 @@ bool MatStream::Write(Mat content)
 	return true;
 }
 
-Mat MatStream::Read()
+cv::Mat MatStream::Read()
 {
-	Mat content(header.height, header.width, header.type, Scalar::all(0));
-	if (file.fail()) return Mat();
-	if (mode == Op::out) return Mat();
+	cv::Mat content(header.height, header.width, header.type, cv::Scalar::all(0));
+	if (file.fail()) return cv::Mat();
+	if (mode == Op::out) return cv::Mat();
 	file.read((char*)(content.data), header.height*header.width*header.bytesPerPixel*header.channels);
 	return content;
 }
