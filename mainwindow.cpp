@@ -28,8 +28,8 @@ void MainWindow::SetGraphicsViewContent(int width, int height, uchar* data)
 void MainWindow::on_buttonOpen_clicked()
 {
 	QString fileName = QFileDialog::getOpenFileName(
-				this, tr("Open file"), "",
-				tr("All file(*.*),MatStream(*.matstream)")
+				this, tr("Open file"), ".",
+				tr("All file(*.*)")
 				);
 	emit Open(fileName);
 }

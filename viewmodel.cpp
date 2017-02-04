@@ -33,13 +33,16 @@ void ViewModel::run()
 		}
 		else if(nowFrame.empty() || lastPos!=nowPos)
 		{
+			//qDebug("opened running\n");
 			nowFrame = stream.Read();
 			lastPos = nowPos;
 			nowPos = nowPos+1;
 			if(nowPos>=totalLen) nowPos = nowHead;
-			cv::cvtColor(nowFrame, nowFrame, CV_BGR2RGB);
+			nowFrame.convertTo(nowFrame, CV_8U);
+			cv::cvtColor(nowFrame, nowFrame, CV_GRAY2RGB);
+			Sleep(30);
+			emit NewFrame(header.width, header.height, nowFrame.data);
 		}
-		emit NewFrame(header.width, header.height, nowFrame.data);
 	}
 }
 
