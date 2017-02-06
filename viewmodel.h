@@ -42,6 +42,10 @@ class ViewModel : public QThread
 		bool playing;
 		bool running;
 		bool opened;
+		bool loading;
+		vector<cv::Mat> frames;
+
+		void SendStreamInfo();
 
 	signals:
 		void NewFrame(int width, int height, uchar* data);
@@ -51,13 +55,15 @@ class ViewModel : public QThread
 		void Play();
 		void Pause();
 		void Goto(int pos);
-		void SetHead(int head);
-		void SetEnd(int end);
+		void SetHead();
+		void SetEnd();
 		void Save(QString newFileName);
 		void Open(QString newFileName);
 		void Close();
 		void Next();
 		void Prev();
+		void ToHead();
+		void ToEnd();
 };
 
 #endif // VIEWMODEL_H

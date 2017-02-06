@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>943</width>
-    <height>589</height>
+    <width>558</width>
+    <height>626</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -34,18 +34,21 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QGraphicsView" name="graphicsView">
+        <widget class="QLabel" name="graph">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
-           <width>512</width>
-           <height>424</height>
+           <width>520</width>
+           <height>440</height>
           </size>
+         </property>
+         <property name="text">
+          <string/>
          </property>
         </widget>
        </item>
@@ -61,24 +64,10 @@
           <string>Control</string>
          </property>
          <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="6">
-           <widget class="QPushButton" name="buttonPlay">
+          <item row="0" column="3">
+           <widget class="QPushButton" name="buttonOpen">
             <property name="text">
-             <string>&gt;</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="10">
-           <widget class="QPushButton" name="pushButton_7">
-            <property name="text">
-             <string>}</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="7">
-           <widget class="QPushButton" name="buttonPause">
-            <property name="text">
-             <string>||</string>
+             <string>Open</string>
             </property>
            </widget>
           </item>
@@ -89,45 +78,10 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="3">
-           <widget class="QPushButton" name="buttonOpen">
-            <property name="text">
-             <string>Open</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="9">
-           <widget class="QPushButton" name="pushButton_6">
-            <property name="text">
-             <string>&gt;|</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0">
            <widget class="QPushButton" name="buttonSetHead">
             <property name="text">
              <string>{</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="9">
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>Total</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>HeadPos</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0" colspan="11">
-           <widget class="QSlider" name="horizontalSlider">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>
@@ -145,20 +99,6 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="3">
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>NowPos</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="8">
-           <widget class="QPushButton" name="pushButton_10">
-            <property name="text">
-             <string>&gt;&gt;</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="5">
            <widget class="QPushButton" name="buttonClose">
             <property name="text">
@@ -166,10 +106,87 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="6">
-           <widget class="QLabel" name="label_3">
+          <item row="1" column="0">
+           <widget class="QPushButton" name="buttonPlay">
             <property name="text">
-             <string>EndPos</string>
+             <string>&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="buttonPause">
+            <property name="text">
+             <string>||</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="buttonNext">
+            <property name="text">
+             <string>&gt;&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QPushButton" name="buttonToEnd">
+            <property name="text">
+             <string>&gt;|</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QPushButton" name="buttonSetEnd">
+            <property name="text">
+             <string>}</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelHeadPos">
+            <property name="text">
+             <string>0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>NowPos</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="4">
+           <widget class="QSlider" name="slider">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="5">
+           <widget class="QLabel" name="labelEndPos">
+            <property name="text">
+             <string>0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="4">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Total</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <widget class="QLabel" name="labelTotalLen">
+            <property name="text">
+             <string>0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="labelNowPos">
+            <property name="text">
+             <string>0</string>
             </property>
            </widget>
           </item>
