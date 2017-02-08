@@ -44,7 +44,7 @@ void ViewModel::run()
 			{
 				nowPos = nowHead;
 			}
-			nowFrame.convertTo(nowFrame, CV_8U, 1/256.0);
+			nowFrame.convertTo(nowFrame, CV_8U, 1/10.0);
 			cv::cvtColor(nowFrame, nowFrame, CV_GRAY2RGB);
 			Sleep(40);
 			emit NewFrame(header.width, header.height, nowFrame.data);
